@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="group.hdx.mapper.StructureStatisticsMapper">
+
+    <select id="getAllStatistics" resultType="group.hdx.po.StructureStatisticsPO">
+        select *
+        from disaster.structure_disasterinfo
+    </select>
+
+    <select id="getStatisticsByCondition" resultType="group.hdx.po.StructureStatisticsPO" parameterType="group.hdx.query.StructureSearchCondition">
+        select *
+        from disaster.structure_disasterinfo
+        where  `date` between #{minDate} and #{maxDate}
+          and location like #{location}
+    </select>
+</mapper>
