@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SoftwareProjectManage" />
+        <module name="disaster_master" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
