@@ -3,10 +3,6 @@ package group.hdx.controller;
 import group.hdx.common.Result;
 import group.hdx.common.ResultGenerator;
 import group.hdx.dto.*;
-import group.hdx.po.EarthquakeStatisticsPO;
-import group.hdx.po.PeopleStatisticsPO;
-import group.hdx.po.SecondStatisticsPO;
-import group.hdx.po.StructureStatisticsPO;
 import group.hdx.query.EarthquakeSearchCondition;
 import group.hdx.query.PeopleSearchCondition;
 import group.hdx.query.SecondSearchCondition;
@@ -21,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -100,10 +94,11 @@ public class InquireController {
         List<ProvinceStatisticsDTO> data = earthquakeStatisticsService.getProvinceStatistics(province);
 
         if (data.size() != 0) {
-            return ResultGenerator.genSuccessResult(data);
-        }
+            return ResultGenerator.genFailResult("未能查找到该省份的数据");
 
-        return ResultGenerator.genFailResult("未能查找到该省份的数据");
+        }
+        return ResultGenerator.genSuccessResult(data);
+
     }
 
     @RequestMapping("/getSecondStatistics/{condition}")
@@ -122,12 +117,12 @@ public class InquireController {
 
         SecondSearchCondition secondSearchCondition = new SecondSearchCondition();
         secondSearchCondition.setMinDate(conditionMap.get("minDate"));
-        secondSearchCondition.setMaxDate(conditionMap.get("MaxDate"));
+        secondSearchCondition.setMaxDate(conditionMap.get("maxDate"));
         secondSearchCondition.setLocation(conditionMap.get("location"));
 
         List<SecondStatisticsDTO> resultList = secondStatisticsService.getStatisticsByCondition(secondSearchCondition);
 
-        if (resultList.size() != 0) {
+        if (resultList.size() == 0) {
             return ResultGenerator.genFailResult("未查找到符合条件的数据");
         }
 
@@ -150,7 +145,7 @@ public class InquireController {
 
         StructureSearchCondition structureSearchCondition = new StructureSearchCondition();
         structureSearchCondition.setMinDate(conditionMap.get("minDate"));
-        structureSearchCondition.setMaxDate(conditionMap.get("MaxDate"));
+        structureSearchCondition.setMaxDate(conditionMap.get("maxDate"));
         structureSearchCondition.setLocation(conditionMap.get("location"));
 
         List<StructureStatisticsDTO> resultList = structureStatisticsService.getStatisticsByCondition(structureSearchCondition);
@@ -195,10 +190,11 @@ public class InquireController {
 
         List<LocationStatisticsDTO> resultList = earthquakeStatisticsService.getRecentDisasterLocation();
 
-        if (resultList.size() != 0) {
-            return ResultGenerator.genSuccessResult(resultList);
+        if (resultList.size() == 0) {
+            return ResultGenerator.genFailResult("查询近期地震数据失败");
+
         }
 
-        return ResultGenerator.genFailResult("查询近期地震数据失败");
+        return ResultGenerator.genSuccessResult(resultList);
     }
 }

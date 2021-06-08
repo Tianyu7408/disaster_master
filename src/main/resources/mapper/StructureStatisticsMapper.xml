@@ -7,12 +7,12 @@
 
     <select id="getAllStatistics" resultType="group.hdx.po.StructureStatisticsPO">
         select *
-        from disaster.structure_disasterinfo
+        from disaster.house_disasterinfo
     </select>
 
     <select id="getStatisticsByCondition" resultType="group.hdx.po.StructureStatisticsPO" parameterType="group.hdx.query.StructureSearchCondition">
         select *
-        from disaster.structure_disasterinfo
+        from disaster.house_disasterinfo
         where  `date` between #{minDate} and #{maxDate}
           and location like #{location}
     </select>

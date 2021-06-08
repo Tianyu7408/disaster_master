@@ -27,7 +27,7 @@ public class SecondStatisticsServiceImpl implements SecondStatisticsService {
     @Override
     public List<SecondStatisticsDTO> getStatisticsByCondition(SecondSearchCondition secondSearchCondition) {
         List<SecondStatisticsDTO> result = new LinkedList<>();
-        for (SecondStatisticsPO sPO : secondStatisticsMapper.getAllStatistics()) {
+        for (SecondStatisticsPO sPO : secondStatisticsMapper.getStatisticsByCondition(secondSearchCondition)) {
             result.add(new SecondStatisticsDTO(sPO));
         }
         return result;
