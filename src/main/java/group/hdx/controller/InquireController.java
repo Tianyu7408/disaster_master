@@ -12,6 +12,7 @@ import group.hdx.service.PeopleStatisticsService;
 import group.hdx.service.SecondStatisticsService;
 import group.hdx.service.StructureStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
